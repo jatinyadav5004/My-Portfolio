@@ -12,7 +12,7 @@ const Home = () => {
           <br />
           I&apos;m <span className="home__title-color">Jatin Yadav</span>
           <br />
-          <span className="home__subtitle">Fullstack Developer</span>
+          <span className="home__subtitle">Software Developer</span>
         </h1>
         <a href="#contact" className="button" aria-label="Contact Jatin">
           Contact
@@ -22,7 +22,8 @@ const Home = () => {
       {/* Social Links */}
       <div className="home__social">
         <a
-          href="https://www.linkedin.com/in/jatin-yadav" 
+          href="https://www.linkedin.com/in/jatin-yadav-57629a203
+" 
           target="_blank"
           rel="noopener noreferrer"
           className="home__social-icon"
@@ -31,7 +32,7 @@ const Home = () => {
           <i className="bx bxl-linkedin"></i>
         </a>
         <a
-          href="https://www.instagram.com/jatin.yadav"
+          href="https://www.instagram.com/jatinyadav5004"
           target="_blank"
           rel="noopener noreferrer"
           className="home__social-icon"
@@ -40,7 +41,7 @@ const Home = () => {
           <i className="bx bxl-instagram"></i>
         </a>
         <a
-          href="https://wa.me/919876543210"
+          href="https://wa.me/919079705004"
           target="_blank"
           rel="noopener noreferrer"
           className="home__social-icon"

@@ -10,9 +10,9 @@ const Header = () => {
       document.body.classList.toggle("dark-theme");
 
       if (document.body.classList.contains("dark-theme")) {
-        icon.src = sunIcon;   // ✅ correct way
+        icon.src = sunIcon;   
       } else {
-        icon.src = moonIcon;  // ✅ correct way
+        icon.src = moonIcon;
       }
     };
 

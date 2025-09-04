@@ -5,16 +5,16 @@ const Footer = () => {
     <footer className="footer">
       <p className="footer__title">Contact Me</p>
       <div className="footer__social">
-        <a href="#" className="footer__icon">
+        <a href="https://www.linkedin.com/in/jatin-yadav-57629a203" className="footer__icon">
           <i className='bx bxl-linkedin'></i>
         </a>
-        <a href="#" className="footer__icon">
+        <a href="https://www.instagram.com/jatinyadav5004" className="footer__icon">
           <i className='bx bxl-instagram'></i>
         </a>
-        <a href="#" className="footer__icon">
+        <a href="https://wa.me/919079705004" className="footer__icon">
           <i className='bx bxl-whatsapp'></i>
         </a>
-        <a href="#" className="footer__icon">
+        <a href="https://github.com/jatinyadav5004" className="footer__icon">
           <i className='bx bxl-github'></i>
         </a>
       </div>
