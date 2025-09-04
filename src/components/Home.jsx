@@ -12,7 +12,7 @@ const Home = () => {
           <br />
           I&apos;m <span className="home__title-color">Jatin Yadav</span>
           <br />
-          <span className="home__subtitle">Fullstack Developer</span>
+          <span className="home__subtitle">I love Akanksha</span>
         </h1>
         <a href="#contact" className="button" aria-label="Contact Jatin">
           Contact
