@@ -12,8 +12,10 @@ function About() {
         <div>
           <h2 className="about__subtitle">I'am Jatin Yadav</h2>
           <p className="about__text">
-            I am a person who is positive about every aspect of life. I like to read, write, think, dream, and much more.
-          </p>
+I am a Full Stack Developer with a strong passion for building real-time applications that are both scalable and user-friendly. With experience across both frontend and backend development, I enjoy working on the complete lifecycle of software—designing, developing, and deploying solutions that solve real-world problems.
+
+
+I love solving complex problems, whether it’s debugging tricky issues, optimizing code for performance, or designing scalable architectures. At the same time, I am a fast learner who enjoys picking up new technologies and adapting to evolving industry trends. I see challenges not as roadblocks but as opportunities to grow and innovate.          </p>
         </div>
       </div>
     </section>

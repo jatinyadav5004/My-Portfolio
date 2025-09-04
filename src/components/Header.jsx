@@ -2,19 +2,19 @@ import React, { useEffect } from 'react';
 import moonIcon from '../assets/img/moon.png';
 import sunIcon from '../assets/img/sun.png';
 
-
 const Header = () => {
   useEffect(() => {
-    var icon=document.getElementById("icon");
-    icon.onclick=function(){
-        document.body.classList.toggle("dark-theme");
-       if(document.body.classList.contains("dark-theme")){
-        icon.src={sunIcon};
-       }
-       else{
-        icon.src ={moonIcon};
-       }
-    }
+    const icon = document.getElementById("icon");
+
+    icon.onclick = function () {
+      document.body.classList.toggle("dark-theme");
+
+      if (document.body.classList.contains("dark-theme")) {
+        icon.src = sunIcon;   // ✅ correct way
+      } else {
+        icon.src = moonIcon;  // ✅ correct way
+      }
+    };
 
     //===== MENU SHOW =====
     const showMenu = (toggleId, navId) => {
@@ -48,20 +48,19 @@ const Header = () => {
         const sectionTop = current.offsetTop - 50;
         let sectionId = current.getAttribute('id');
 
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          document
-            .querySelector('.nav__menu a[href*=' + sectionId + ']')
-            .classList.add('active');
-        } else {
-          document
-            .querySelector('.nav__menu a[href*=' + sectionId + ']')
-            .classList.remove('active');
+        const link = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+        if (link) {
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
         }
       });
     };
     window.addEventListener('scroll', scrollActive);
 
-    // Cleanup event listeners on component unmount
+    // Cleanup
     return () => {
       window.removeEventListener('scroll', scrollActive);
       navLink.forEach((n) => n.removeEventListener('click', linkAction));
@@ -77,21 +76,11 @@ const Header = () => {
 
         <div className="nav__menu" id="nav-menu">
           <ul className="nav__list">
-            <li className="nav__item">
-              <a href="#home" className="nav__link active">Home</a>
-            </li>
-            <li className="nav__item">
-              <a href="#about" className="nav__link">About</a>
-            </li>
-            <li className="nav__item">
-              <a href="#skills" className="nav__link">Skills</a>
-            </li>
-            <li className="nav__item">
-              <a href="#work" className="nav__link">Work</a>
-            </li>
-            <li className="nav__item">
-              <a href="#contact" className="nav__link">Contact</a>
-            </li>
+            <li className="nav__item"><a href="#home" className="nav__link active">Home</a></li>
+            <li className="nav__item"><a href="#about" className="nav__link">About</a></li>
+            <li className="nav__item"><a href="#skills" className="nav__link">Skills</a></li>
+            <li className="nav__item"><a href="#work" className="nav__link">Work</a></li>
+            <li className="nav__item"><a href="#contact" className="nav__link">Contact</a></li>
           </ul>
         </div>
 

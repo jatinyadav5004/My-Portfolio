@@ -3,14 +3,21 @@ import React, { useState } from 'react';
 const Contact = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [name, setName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // sendEmail logic goes here
-    console.log('Email:', email);
-    console.log('Message:', message);
+
+    const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+
+    // open mail client
+    window.location.href = `mailto:jatinyadav5004@gmail.com?subject=${subject}&body=${body}`;
+
+    // clear inputs
     setEmail('');
     setMessage('');
+    setName('');
   };
 
   return (
@@ -22,6 +29,8 @@ const Contact = () => {
             type="text" 
             placeholder="Name" 
             className="contact__input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required 
           />
           <input 
@@ -42,7 +51,9 @@ const Contact = () => {
             onChange={(e) => setMessage(e.target.value)}
             required
           />
-          <button type="submit" className="contact__button button">Submit</button>
+          <button type="submit" className="contact__button button">
+            Send Email
+          </button>
         </form>
       </div>
     </section>

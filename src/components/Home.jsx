@@ -1,52 +1,73 @@
 import React from "react";
-import "../assets/css/styles.css"; 
+import "../assets/css/styles.css";
 import perfilImg from "../assets/img/perfil.png";
 
 const Home = () => {
   return (
     <section className="home bd-grid" id="home">
+      {/* Intro Section */}
       <div className="home__data">
         <h1 className="home__title">
           Hi,
           <br />
-          I'am <span className="home__title-color">Jatin Yadav</span>
+          I&apos;m <span className="home__title-color">Jatin Yadav</span>
           <br />
-          Full Stack Developer
+          <span className="home__subtitle">Fullstack Developer</span>
         </h1>
-        <a href="#contact" className="button">
+        <a href="#contact" className="button" aria-label="Contact Jatin">
           Contact
         </a>
       </div>
 
+      {/* Social Links */}
       <div className="home__social">
-        <a href="https://www.linkedin.com" className="home__social-icon">
+        <a
+          href="https://www.linkedin.com/in/jatin-yadav" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home__social-icon"
+          aria-label="LinkedIn"
+        >
           <i className="bx bxl-linkedin"></i>
         </a>
-        <a href="https://www.instagram.com" className="home__social-icon">
+        <a
+          href="https://www.instagram.com/jatin.yadav"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home__social-icon"
+          aria-label="Instagram"
+        >
           <i className="bx bxl-instagram"></i>
         </a>
-        <a href="https://www.whatsapp.com" className="home__social-icon">
+        <a
+          href="https://wa.me/919876543210"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home__social-icon"
+          aria-label="WhatsApp"
+        >
           <i className="bx bxl-whatsapp"></i>
         </a>
       </div>
 
+      {/* Profile Image with SVG Mask */}
       <div className="home__img">
         <svg
           className="home__blob"
           viewBox="0 0 479 467"
           xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Profile illustration"
         >
-          <mask id="mask0" maskType="alpha">
-            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
-          </mask>
+         
           <g mask="url(#mask0)">
-            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
+            <path d="M9.19 145.96C34.03 76.58 114.87 54.73 184.11 29.48C245.80 6.99 311.86 -14.95 370.73 14.14C431.21 44.03 467.95 107.51 477.19 174.31C485.90 237.23 454.93 294.38 416.51 344.95C373.74 401.25 326.07 462.80 255.44 466.19C179.42 469.83 111.55 422.14 65.16 361.81C17.48 299.81 -17.16 219.58 9.19 145.96Z" />
             <image
               className="home__blob-img"
               x="50"
               y="60"
               href={perfilImg}
-              alt="Profile"
+              alt="Jatin Yadav"
             />
           </g>
         </svg>
