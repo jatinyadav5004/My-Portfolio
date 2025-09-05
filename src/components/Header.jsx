@@ -71,7 +71,7 @@ const Header = () => {
     <header className="l-header">
       <nav className="nav bd-grid">
         <div>
-          <a href="#" className="nav__logo">Welcome to Jatin portfolio!!!</a>
+          <a href="#" className="nav__logo">Welcome to Jatin portfolio!!</a>
         </div>
 
         <div className="nav__menu" id="nav-menu">
@@ -84,11 +84,7 @@ const Header = () => {
           </ul>
         </div>
 
-        {/* Theme changer section */}
-        <div className="theme-changer" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <h4 style={{ margin: 0 }}>Theme Toggle:</h4>
-          <img src={moonIcon} id="icon" alt="theme-icon" style={{ cursor: "pointer", width: "24px" }} />
-        </div>
+        <img src={moonIcon} id="icon" alt="theme-icon" />
 
         <div className="nav__toggle" id="nav-toggle">
           <i className='bx bx-menu'></i>

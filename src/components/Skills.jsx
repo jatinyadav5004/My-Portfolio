@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../assets/css/styles.css";
-import skillimg from "../assets/img/work3.jpg";
+import skillimg from "../assets/img/workimage.jpg";
 import resumePDF from "../assets/doc/resume.pdf";
 
 function Skills() {
