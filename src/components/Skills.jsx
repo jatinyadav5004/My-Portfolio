@@ -1,9 +1,11 @@
-import React from 'react';
-import '../assets/css/styles.css';
-import skillimg from '../assets/img/work3.jpg';
-import resumePDF from '../assets/doc/resume.pdf'; 
+import React, { useState } from "react";
+import "../assets/css/styles.css";
+import skillimg from "../assets/img/work3.jpg";
+import resumePDF from "../assets/doc/resume.pdf";
 
 function Skills() {
+  const [showResume, setShowResume] = useState(false);
+
   return (
     <section className="skills section" id="skills">
       <h2 className="section-title">Skills</h2>
@@ -14,6 +16,7 @@ function Skills() {
             Professionals require a combination of hard and soft skills...
           </p>
 
+          {/* Skills */}
           <div className="skills__data">
             <div className="skills__names">
               <i className="bx bxl-html5 skills__icon"></i>
@@ -55,16 +58,33 @@ function Skills() {
           <img src={skillimg} alt="Skills" className="skills__img" />
         </div>
 
+        {/* Resume Button */}
         <div className="about__buttons">
-          <a 
-            download="Jatin_Yadav_Resume.pdf"  // 👉 File will download with this name
-            href={resumePDF} 
+          <button 
+            onClick={() => setShowResume(true)} 
             className="button button--flex"
           >
-            Download Resume<i className="uil uil-download-alt button__icon"></i>
-          </a>
+            View Resume<i className="uil uil-eye button__icon"></i>
+          </button>
         </div>
       </div>
+
+      {/* Resume Popup (Modal) */}
+      {showResume && (
+        <div className="resume-modal">
+          <div className="resume-content">
+            <button className="close-btn" onClick={() => setShowResume(false)}>
+              ✖
+            </button>
+            <iframe 
+              src={resumePDF} 
+              title="Resume" 
+              width="100%" 
+              height="500px" 
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

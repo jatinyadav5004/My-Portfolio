@@ -8,13 +8,15 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    // Subject only includes the sender's name
+    const subject = encodeURIComponent(`Message from ${name}`);
+    // Body is ONLY the message content
+    const body = encodeURIComponent(message);
 
-    // open mail client
+    // Open default mail client
     window.location.href = `mailto:jatinyadav5004@gmail.com?subject=${subject}&body=${body}`;
 
-    // clear inputs
+    // Clear inputs after sending
     setEmail('');
     setMessage('');
     setName('');
@@ -25,27 +27,27 @@ const Contact = () => {
       <h2 className="section-title">Contact</h2>
       <div className="contact__container bd-grid">
         <form className="contact__form" onSubmit={handleSubmit}>
-          <input 
-            type="text" 
-            placeholder="Name" 
+          <input
+            type="text"
+            placeholder="Name"
             className="contact__input"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required 
+            required
           />
-          <input 
-            id="email" 
-            type="email" 
-            placeholder="Email" 
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
             className="contact__input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required 
+            required
           />
-          <textarea 
-            cols="0" 
-            rows="10" 
-            placeholder="Write your message here." 
+          <textarea
+            cols="0"
+            rows="10"
+            placeholder="Write your message here."
             className="contact__input"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
