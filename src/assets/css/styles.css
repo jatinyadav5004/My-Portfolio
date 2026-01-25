@@ -262,6 +262,24 @@ img {
   }
 }
 
+/* Dark theme mobile menu */
+.dark-theme .nav__menu {
+  background-color: var(--card-bg) !important;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-theme .nav__link {
+  color: var(--text-primary) !important;
+}
+
+.dark-theme .nav__menu::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .nav__menu::-webkit-scrollbar-thumb {
+  background: var(--first-color);
+}
+
 .nav__item {
   margin-bottom: var(--mb-4);
 }
@@ -1628,6 +1646,11 @@ img {
   .nav__link {
     color: var(--second-color);
   }
+  
+  .dark-theme .nav__link {
+    color: var(--text-primary) !important;
+  }
+  
   .theme-toggle {
     display: flex;
   }
