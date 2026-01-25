@@ -227,29 +227,12 @@ img {
   
   .theme-toggle {
     display: flex !important;
-    padding: 0.4rem 0.6rem;
-    gap: 0.5rem;
+    width: 40px;
+    height: 40px;
   }
   
-  .theme-toggle__label {
-    font-size: 0.6rem;
-    min-width: 28px;
-  }
-  
-  .theme-toggle__switch {
-    width: 48px;
-    height: 24px;
-  }
-  
-  .theme-toggle__slider {
-    width: 18px;
-    height: 18px;
-    top: 3px;
-    left: 3px;
-  }
-  
-  .theme-toggle__switch.dark .theme-toggle__slider {
-    transform: translateX(24px);
+  .theme-toggle__icon {
+    font-size: 1.25rem;
   }
   
   .nav__controls {
@@ -343,113 +326,58 @@ img {
   gap: 1.5rem;
 }
 
-/* Theme Toggle Switch */
+/* Theme Toggle Switch - Icon Only */
 .theme-toggle {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
   cursor: pointer;
-  padding: 0.5rem 0.75rem;
-  border-radius: 2rem;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   background: rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   user-select: none;
   border: none;
   outline: none;
+  position: relative;
 }
 
 .theme-toggle:hover {
   background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 
-.theme-toggle__label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  min-width: 32px;
-  text-align: center;
-  user-select: none;
-  pointer-events: none;
-}
-
-.theme-toggle__label.active {
+.theme-toggle__icon {
+  font-size: 1.5rem;
   color: var(--first-color);
-  font-weight: 700;
-}
-
-.theme-toggle__label::before,
-.theme-toggle__label::after {
-  display: none;
-}
-
-.theme-toggle__switch {
-  position: relative;
-  width: 56px;
-  height: 28px;
-  background: #ccc;
-  border-radius: 14px;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
-  overflow: hidden;
+  display: block;
 }
 
-.theme-toggle__switch.dark {
-  background: var(--gradient-1);
-  border-color: rgba(255, 255, 255, 0.2);
+.theme-toggle:hover .theme-toggle__icon {
+  transform: rotate(15deg);
 }
 
-.theme-toggle__slider {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 22px;
-  height: 22px;
-  background: white;
-  border-radius: 50%;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 2;
+.theme-toggle__icon.bx-sun {
+  color: #ffa726;
+  animation: rotate 0.5s ease;
 }
 
-.theme-toggle__switch.dark .theme-toggle__slider {
-  transform: translateX(28px);
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+.theme-toggle__icon.bx-moon {
+  color: #4a90e2;
+  animation: rotate 0.5s ease;
 }
 
-.theme-toggle__switch::before {
-  content: '☀️';
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 11px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.theme-toggle__switch::after {
-  content: '🌙';
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 11px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.theme-toggle__switch:not(.dark)::before {
-  opacity: 0.7;
-}
-
-.theme-toggle__switch.dark::after {
-  opacity: 0.9;
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
 }
 
 /* Dark theme toggle styling */
@@ -461,22 +389,16 @@ img {
   background: rgba(255, 255, 255, 0.15);
 }
 
-.dark-theme .theme-toggle__label {
-  color: #888;
+.dark-theme .theme-toggle__icon {
+  color: #ffa726;
 }
 
-.dark-theme .theme-toggle__label.active {
-  color: var(--first-color);
+.dark-theme .theme-toggle__icon.bx-sun {
+  color: #ffa726;
 }
 
-.dark-theme .theme-toggle__switch {
-  background: #444;
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.dark-theme .theme-toggle__switch.dark {
-  background: var(--gradient-1);
-  border-color: rgba(255, 255, 255, 0.3);
+.dark-theme .theme-toggle__icon.bx-moon {
+  color: #4a90e2;
 }
 /* new changes */
 :root{
@@ -1915,47 +1837,7 @@ img {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--second-color);
-  margin-bottom: 0.75rem;
-}
-
-.skill__item-progress {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.skill__item-bar {
-  flex: 1;
-  height: 8px;
-  background: #e0e0e0;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.skill__item-fill {
-  height: 100%;
-  border-radius: 10px;
-  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.skill__item-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation: shimmer 2s infinite;
-}
-
-.skill__item-percentage {
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--skill-color, var(--first-color));
-  min-width: 40px;
-  text-align: right;
+  margin-top: 0.5rem;
 }
 
 .skill__card--featured {

@@ -36,7 +36,7 @@ const Contact = () => {
     {
       icon: 'bx bx-map',
       title: 'Location',
-      value: 'Navi Mumbai, India',
+      value: 'Rewari, Haryana',
       link: '#'
     }
   ];

@@ -72,15 +72,6 @@ function Skills() {
                 </div>
                 <div className="skill__item-content">
                   <h4 className="skill__item-name">{skill.name}</h4>
-                  <div className="skill__item-progress">
-                    <div className="skill__item-bar">
-                      <div 
-                        className="skill__item-fill" 
-                        style={{ width: `${skill.level}%`, backgroundColor: skill.color }}
-                      ></div>
-                    </div>
-                    <span className="skill__item-percentage">{skill.level}%</span>
-                  </div>
                 </div>
               </div>
             ))}

@@ -84,11 +84,7 @@ const Header = () => {
 
         <div className="nav__controls">
           <div className="theme-toggle" onClick={toggleTheme}>
-            <span className={`theme-toggle__label ${!isDark ? 'active' : ''}`}>Light</span>
-            <div className={`theme-toggle__switch ${isDark ? 'dark' : ''}`}>
-              <div className="theme-toggle__slider"></div>
-            </div>
-            <span className={`theme-toggle__label ${isDark ? 'active' : ''}`}>Dark</span>
+            <i className={`bx ${isDark ? 'bx-sun' : 'bx-moon'} theme-toggle__icon`}></i>
           </div>
 
           <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>

@@ -8,7 +8,7 @@ import work6 from '../assets/img/work6.jpg';
 
 const projects = [
   {
-    img: work1,
+    img: work6,
     title: "Hospital Appointment System",
     status: "Ongoing",
     description: "Built an online appointment system with active participation as a team leader",
@@ -53,7 +53,7 @@ const projects = [
     role: "Developer"
   },
   {
-    img: work6,
+    img: work1,
     title: "Gallery Website",
     status: "Completed",
     description: "Modern gallery website with responsive design",
