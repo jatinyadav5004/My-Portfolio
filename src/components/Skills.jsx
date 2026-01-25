@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "../assets/css/styles.css";
 import resumePDF from "../assets/doc/resume.pdf";
 
 function Skills() {
-  const [showResume, setShowResume] = useState(false);
-
   // Core Technical Skills
   const technicalSkills = [
     { name: "Java", icon: "bx bx-code-alt", level: 90, color: "#f89820", emoji: "☕" },
@@ -12,6 +10,41 @@ function Skills() {
     { name: "React.js", icon: "bx bxl-react", level: 88, color: "#61dafb" },
     { name: "MySQL", icon: "bx bx-data", level: 87, color: "#00758f" },
   ];
+
+  const handleDownloadResume = async () => {
+    try {
+      // Fetch the PDF file
+      const response = await fetch(resumePDF);
+      const blob = await response.blob();
+      
+      // Create a blob URL
+      const blobUrl = window.URL.createObjectURL(blob);
+      
+      // Create a temporary anchor element to trigger download
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'Jatin_Yadav_Resume.pdf';
+      link.style.display = 'none';
+      
+      // Append to body, click, and remove
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      // Fallback: try direct download
+      const link = document.createElement('a');
+      link.href = resumePDF;
+      link.download = 'Jatin_Yadav_Resume.pdf';
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
 
   return (
     <section className="skills section" id="skills">
@@ -54,35 +87,17 @@ function Skills() {
           </div>
         </div>
 
-        {/* Resume Button */}
+        {/* Resume Download Button */}
         <div className="skills__resume-btn">
           <button 
-            onClick={() => setShowResume(true)} 
+            onClick={handleDownloadResume}
             className="button button--resume"
           >
-            <i className="bx bx-file-blank"></i>
-            View Full Resume
+            <i className="bx bx-download"></i>
+            Download Resume
           </button>
         </div>
       </div>
-
-      {/* Resume Popup (Modal) */}
-      {showResume && (
-        <div className="resume-modal" onClick={() => setShowResume(false)}>
-          <div className="resume-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setShowResume(false)}>
-              ✖
-            </button>
-            <iframe 
-              src={resumePDF} 
-              title="Resume" 
-              width="100%" 
-              height="600px" 
-              style={{ border: 'none', borderRadius: '8px' }}
-            />
-          </div>
-        </div>
-      )}
     </section>
   );
 }
