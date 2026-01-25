@@ -1,42 +1,19 @@
-import React, { useEffect } from 'react';
-import moonIcon from '../assets/img/moon.png';
-import sunIcon from '../assets/img/sun.png';
+import React, { useEffect, useState } from 'react';
 
 const Header = () => {
+  const [isDark, setIsDark] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   useEffect(() => {
-    const icon = document.getElementById("icon");
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+      setIsDark(true);
+    }
+  }, []);
 
-    icon.onclick = function () {
-      document.body.classList.toggle("dark-theme");
-
-      if (document.body.classList.contains("dark-theme")) {
-        icon.src = sunIcon;   
-      } else {
-        icon.src = moonIcon;
-      }
-    };
-
-    //===== MENU SHOW =====
-    const showMenu = (toggleId, navId) => {
-      const toggle = document.getElementById(toggleId),
-        nav = document.getElementById(navId);
-
-      if (toggle && nav) {
-        toggle.addEventListener('click', () => {
-          nav.classList.toggle('show');
-        });
-      }
-    };
-    showMenu('nav-toggle', 'nav-menu');
-
-    //===== REMOVE MENU MOBILE =====
-    const navLink = document.querySelectorAll('.nav__link');
-    const linkAction = () => {
-      const navMenu = document.getElementById('nav-menu');
-      navMenu.classList.remove('show');
-    };
-    navLink.forEach((n) => n.addEventListener('click', linkAction));
-
+  useEffect(() => {
     //===== SCROLL SECTIONS ACTIVE LINK =====
     const sections = document.querySelectorAll('section[id]');
 
@@ -63,31 +40,60 @@ const Header = () => {
     // Cleanup
     return () => {
       window.removeEventListener('scroll', scrollActive);
-      navLink.forEach((n) => n.removeEventListener('click', linkAction));
     };
   }, []);
+
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    
+    if (newTheme) {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="l-header">
       <nav className="nav bd-grid">
         <div>
-          <a href="#" className="nav__logo">Welcome to Jatin portfolio!!</a>
+          <a href="#home" className="nav__logo">JY</a>
         </div>
 
-        <div className="nav__menu" id="nav-menu">
+        <div className={`nav__menu ${isMenuOpen ? 'show' : ''}`} id="nav-menu">
           <ul className="nav__list">
-            <li className="nav__item"><a href="#home" className="nav__link active">Home</a></li>
-            <li className="nav__item"><a href="#about" className="nav__link">About</a></li>
-            <li className="nav__item"><a href="#skills" className="nav__link">Skills</a></li>
-            <li className="nav__item"><a href="#work" className="nav__link">Work</a></li>
-            <li className="nav__item"><a href="#contact" className="nav__link">Contact</a></li>
+            <li className="nav__item"><a href="#home" className="nav__link active" onClick={closeMenu}>Home</a></li>
+            <li className="nav__item"><a href="#about" className="nav__link" onClick={closeMenu}>About</a></li>
+            <li className="nav__item"><a href="#experience" className="nav__link" onClick={closeMenu}>Experience</a></li>
+            <li className="nav__item"><a href="#skills" className="nav__link" onClick={closeMenu}>Skills</a></li>
+            <li className="nav__item"><a href="#work" className="nav__link" onClick={closeMenu}>Projects</a></li>
+            <li className="nav__item"><a href="#contact" className="nav__link" onClick={closeMenu}>Contact</a></li>
           </ul>
         </div>
 
-        <img src={moonIcon} id="icon" alt="theme-icon" />
+        <div className="nav__controls">
+          <div className="theme-toggle" onClick={toggleTheme}>
+            <span className={`theme-toggle__label ${!isDark ? 'active' : ''}`}>Light</span>
+            <div className={`theme-toggle__switch ${isDark ? 'dark' : ''}`}>
+              <div className="theme-toggle__slider"></div>
+            </div>
+            <span className={`theme-toggle__label ${isDark ? 'active' : ''}`}>Dark</span>
+          </div>
 
-        <div className="nav__toggle" id="nav-toggle">
-          <i className='bx bx-menu'></i>
+          <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
+            <i className={`bx ${isMenuOpen ? 'bx-x' : 'bx-menu'}`}></i>
+          </div>
         </div>
       </nav>
     </header>
