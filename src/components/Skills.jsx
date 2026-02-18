@@ -1,94 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/css/styles.css";
+import skillimg from "../assets/img/workimage.jpg";
 import resumePDF from "../assets/doc/resume.pdf";
 
 function Skills() {
-  // Core Technical Skills
-  const technicalSkills = [
-    { name: "Java", icon: "bx bx-code-alt", level: 90, color: "#f89820", emoji: "☕" },
-    { name: "Spring Boot", icon: "bx bx-code-curly", level: 85, color: "#6db33f" },
-    { name: "React.js", icon: "bx bxl-react", level: 88, color: "#61dafb" },
-    { name: "MySQL", icon: "bx bx-data", level: 87, color: "#00758f" },
-  ];
-
-  const handleDownloadResume = async () => {
-    try {
-      // Fetch the PDF file
-      const response = await fetch(resumePDF);
-      const blob = await response.blob();
-      
-      // Create a blob URL
-      const blobUrl = window.URL.createObjectURL(blob);
-      
-      // Create a temporary anchor element to trigger download
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = 'Jatin_Yadav_Resume.pdf';
-      link.style.display = 'none';
-      
-      // Append to body, click, and remove
-      document.body.appendChild(link);
-      link.click();
-      
-      // Clean up
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-      console.error('Error downloading resume:', error);
-      // Fallback: try direct download
-      const link = document.createElement('a');
-      link.href = resumePDF;
-      link.download = 'Jatin_Yadav_Resume.pdf';
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
+  const [showResume, setShowResume] = useState(false);
 
   return (
     <section className="skills section" id="skills">
-      <h2 className="section-title">Technical Skills</h2>
-      <p className="skills__intro">
-        Core technologies I specialize in for building modern, scalable applications
-      </p>
-      
+      <h2 className="section-title">Skills</h2>
       <div className="skills__container bd-grid">
-        <div className="skills__single-card animate-on-scroll">
-          <h3 className="skills__card-title">Core Technical Skills</h3>
-          <div className="skills__horizontal-grid">
-            {technicalSkills.map((skill, index) => (
-              <div 
-                key={index} 
-                className="skill__item"
-                style={{ '--skill-color': skill.color }}
-              >
-                <div className="skill__item-icon">
-                  {skill.emoji ? (
-                    <span className="skill__item-emoji">{skill.emoji}</span>
-                  ) : (
-                    <i className={skill.icon}></i>
-                  )}
-                </div>
-                <div className="skill__item-content">
-                  <h4 className="skill__item-name">{skill.name}</h4>
-                </div>
-              </div>
-            ))}
+        <div>
+          <h2 className="skills__subtitle">Professional Skills</h2>
+          <p className="skills__text">
+            Professionals require a combination of hard and soft skills...
+          </p>
+
+          {/* Skills */}
+          <div className="skills__data">
+            <div className="skills__names">
+              <i className="bx bxl-html5 skills__icon"></i>
+              <span className="skills__name">HTML5</span>
+            </div>
+            <div className="skills__bar skills__html"></div>
+            <div><span className="skills__percentage">95%</span></div>
+          </div>
+
+          <div className="skills__data">
+            <div className="skills__names">
+              <i className="bx bxl-css3 skills__icon"></i>
+              <span className="skills__name">CSS3</span>
+            </div>
+            <div className="skills__bar skills__css"></div>
+            <div><span className="skills__percentage">85%</span></div>
+          </div>
+
+          <div className="skills__data">
+            <div className="skills__names">
+              <i className="bx bxl-javascript skills__icon"></i>
+              <span className="skills__name">JavaScript</span>
+            </div>
+            <div className="skills__bar skills__js"></div>
+            <div><span className="skills__percentage">65%</span></div>
+          </div>
+
+          <div className="skills__data">
+            <div className="skills__names">
+              <i className="bx bxs-paint skills__icon"></i>
+              <span className="skills__name">Java</span>
+            </div>
+            <div className="skills__bar skills__ux"></div>
+            <div><span className="skills__percentage">85%</span></div>
           </div>
         </div>
 
-        {/* Resume Download Button */}
-        <div className="skills__resume-btn">
+        <div>
+          <img src={skillimg} alt="Skills" className="skills__img" />
+        </div>
+
+        {/* Resume Button */}
+        <div className="about__buttons">
           <button 
-            onClick={handleDownloadResume}
-            className="button button--resume"
+            onClick={() => setShowResume(true)} 
+            className="button button--flex"
           >
-            <i className="bx bx-download"></i>
-            Download Resume
+            View Resume<i className="uil uil-eye button__icon"></i>
           </button>
+
         </div>
       </div>
+
+      {/* Resume Popup (Modal) */}
+      {showResume && (
+        <div className="resume-modal">
+          <div className="resume-content">
+            <button className="close-btn" onClick={() => setShowResume(false)}>
+              ✖
+            </button>
+            <iframe 
+              src={resumePDF} 
+              title="Resume" 
+              width="100%" 
+              height="500px" 
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
