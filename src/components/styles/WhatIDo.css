@@ -34,37 +34,55 @@
 }
 .what-box-in {
   flex-direction: column;
-  height: 500px;
+  align-items: stretch;
+  min-height: 520px;
+  height: auto;
   margin-left: 200px;
   position: relative;
   display: none;
 }
 .what-content {
   width: 450px;
-  height: 33%;
-  min-height: 50%;
+  flex: 1 1 0;
+  min-height: 240px;
+  height: auto;
+  max-height: none;
   transition: 0.5s;
   position: relative;
-  padding: 50px;
+  padding: 50px 20px 50px 50px;
   box-sizing: border-box;
   isolation: isolate;
   background: #0a0e17;
   background: color-mix(in srgb, var(--backgroundColor) 96%, transparent);
   border-radius: 4px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  grid-template-rows: auto;
+  column-gap: 8px;
+  align-items: stretch;
+  overflow: hidden;
 }
 
 .what-noTouch:hover,
 .what-content-active {
-  min-height: 67%;
-  padding: 40px 50px;
+  flex: 1 0 auto;
+  min-height: min-content;
+  height: auto;
+  max-height: none;
+  padding: 40px 16px 40px 44px;
+  grid-template-rows: auto;
+  overflow: visible;
 }
 
 .what-noTouch:hover ~ .what-content,
 .what-box-in:hover .what-noTouch:not(:hover),
 .what-content.what-sibling {
-  min-height: 33%;
-  padding: 10px 50px;
+  flex: 0 0 auto;
+  min-height: 72px;
+  max-height: 130px;
+  padding: 10px 16px 10px 44px;
+  overflow: hidden;
 }
 .what-content h3 {
   font-size: 35px;
@@ -160,13 +178,20 @@
   border-top: none;
 }
 .what-arrow {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 25px;
-  height: 25px;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: center;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  margin-bottom: 4px;
   border: 1px solid #fff;
-  z-index: 3;
+  z-index: 4;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 .what-arrow::before {
   content: "";
@@ -227,10 +252,22 @@
   position: absolute;
 }
 .what-content-in {
-  height: 100%;
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
   position: relative;
   z-index: 2;
+  align-self: start;
+}
+
+/* Expanded / hover: show full copy + tags (no clipping) */
+.what-noTouch:hover .what-content-in,
+.what-content-active .what-content-in {
+  overflow: visible;
+  max-height: none;
+  padding-right: 4px;
 }
 .what-content-in h5 {
   font-weight: 600;
@@ -283,27 +320,29 @@
     margin-right: 20%;
   }
   .what-box-in {
-    height: 400px;
+    min-height: 400px;
+    height: auto;
   }
   .what-content h3 {
     font-size: 28px;
   }
   .what-content {
-    padding: 30px;
+    padding: 30px 14px 30px 28px;
     width: 400px;
+    grid-template-columns: minmax(0, 1fr) 40px;
   }
   .what-content p {
     font-size: 13px;
   }
   .what-noTouch:hover,
   .what-content-active {
-    padding: 20px 30px;
+    padding: 20px 12px 20px 26px;
   }
 
   .what-noTouch:hover ~ .what-content,
   .what-box-in:hover .what-noTouch:not(:hover),
   .what-content.what-sibling {
-    padding: 10px 30px;
+    padding: 10px 12px 10px 26px;
   }
   .what-tags {
     font-size: 12px;
@@ -324,11 +363,12 @@
     padding-bottom: 50px;
   }
   .what-box-in {
-    height: 500px;
+    min-height: 500px;
+    height: auto;
     margin-left: -50px;
   }
   .what-content {
-    padding: 50px;
+    padding: 50px 18px 50px 44px;
     width: 500px;
   }
   .what-content p {
@@ -336,15 +376,13 @@
   }
   .what-noTouch:hover,
   .what-content-active {
-    min-height: 67%;
-    padding: 50px;
+    padding: 44px 14px 44px 40px;
   }
 
   .what-noTouch:hover ~ .what-content,
   .what-box-in:hover .what-noTouch:not(:hover),
   .what-content.what-sibling {
-    min-height: 33%;
-    padding: 10px 50px;
+    padding: 10px 14px 10px 40px;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -360,7 +398,8 @@
     justify-content: left;
   }
   .what-box:last-child {
-    height: 500px;
+    min-height: 0;
+    height: auto;
   }
   .what-box {
     width: 500px;
@@ -369,31 +408,36 @@
   }
   .what-content {
     width: 100%;
+    flex: 1 1 auto;
+    grid-template-rows: auto;
+    min-height: 200px;
+    height: auto;
   }
   .what-box-in {
     margin-left: 0px;
-    height: 450px;
+    height: auto;
+    min-height: 480px;
   }
+  /* Touch: no :hover — keep skill row visible (was stuck at opacity: 0) */
   .what-content h5,
   .what-content-flex {
-    opacity: 0;
-    transition: 0.3s;
-  }
-  .what-noTouch:hover h5,
-  .what-content-active h5,
-  .what-noTouch:hover .what-content-flex,
-  .what-content-active .what-content-flex {
     opacity: 1;
   }
   .what-content {
-    padding: 30px;
+    padding: 24px 12px 24px 20px;
+    grid-template-columns: minmax(0, 1fr) 36px;
   }
   .what-content p {
-    font-size: 11px;
+    font-size: 13px;
+    line-height: 1.55;
   }
   .what-noTouch:hover,
   .what-content-active {
-    padding: 10px 30px;
+    flex: 1 0 auto;
+    min-height: min-content;
+    max-height: none;
+    padding: 24px 12px 24px 20px;
+    overflow: visible;
   }
   .what-tags {
     font-size: 11px;
@@ -402,10 +446,39 @@
   .what-noTouch:hover ~ .what-content,
   .what-box-in:hover .what-noTouch:not(:hover),
   .what-content.what-sibling {
-    padding: 5px 30px;
+    flex: 0 0 auto;
+    min-height: 64px;
+    max-height: 120px;
+    padding: 16px 12px 16px 20px;
+    overflow: hidden;
   }
   .what-content h3 {
     font-size: 25px;
+  }
+  /* Skip flicker intro on small screens — content visible immediately */
+  .what-content-in {
+    animation: none;
+    opacity: 1;
+    overflow: visible;
+  }
+  .what-noTouch:hover .what-content-in,
+  .what-content-active .what-content-in {
+    overflow: visible;
+  }
+}
+
+/* Narrow desktop window only: hide tags until hover (fine pointer + hover) */
+@media (hover: hover) and (pointer: fine) and (max-width: 900px) {
+  .what-content h5,
+  .what-content-flex {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .what-noTouch:hover h5,
+  .what-content-active h5,
+  .what-noTouch:hover .what-content-flex,
+  .what-content-active .what-content-flex {
+    opacity: 1;
   }
 }
 @media only screen and (max-width: 550px) {

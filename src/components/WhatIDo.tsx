@@ -102,8 +102,8 @@ const WhatIDo = () => {
                 <div className="what-tags">JavaScript</div>
                 <div className="what-tags">TypeScript</div>
               </div>
-              <div className="what-arrow"></div>
             </div>
+            <div className="what-arrow" aria-hidden="true" />
           </div>
           <div
             className="what-content what-noTouch"
@@ -140,8 +140,8 @@ const WhatIDo = () => {
                 <div className="what-tags">MySQL</div>
                 <div className="what-tags">Firebase</div>
               </div>
-              <div className="what-arrow"></div>
             </div>
+            <div className="what-arrow" aria-hidden="true" />
           </div>
         </div>
       </div>
