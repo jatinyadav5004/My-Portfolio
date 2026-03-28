@@ -79,6 +79,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Above custom cursor (z-index 99). Stops mix-blend-mode cursor from painting over card text. */
+#smooth-wrapper {
+  position: relative;
+  z-index: 100;
+}
+
 .container-main {
   width: 100%;
   margin: auto;
