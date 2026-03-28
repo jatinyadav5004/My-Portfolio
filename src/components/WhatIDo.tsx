@@ -8,21 +8,16 @@ const WhatIDo = () => {
     containerRef.current[index] = el;
   };
   useEffect(() => {
-    if (ScrollTrigger.isTouch) {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.classList.remove("what-noTouch");
-          container.addEventListener("click", () => handleClick(container));
-        }
-      });
-    }
-    return () => {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.removeEventListener("click", () => handleClick(container));
-        }
-      });
-    };
+    if (!ScrollTrigger.isTouch) return;
+    const cleanups: (() => void)[] = [];
+    containerRef.current.forEach((container) => {
+      if (!container) return;
+      container.classList.remove("what-noTouch");
+      const onTap = () => handleCardTap(container);
+      container.addEventListener("click", onTap);
+      cleanups.push(() => container.removeEventListener("click", onTap));
+    });
+    return () => cleanups.forEach((fn) => fn());
   }, []);
   return (
     <div className="whatIDO" data-cursor="disable">
@@ -151,17 +146,25 @@ const WhatIDo = () => {
 
 export default WhatIDo;
 
-function handleClick(container: HTMLDivElement) {
-  container.classList.toggle("what-content-active");
-  container.classList.remove("what-sibling");
-  if (container.parentElement) {
-    const siblings = Array.from(container.parentElement.children);
+/** Only targets `.what-content` nodes — ignores `what-border2` and other siblings. */
+function handleCardTap(container: HTMLDivElement) {
+  const parent = container.parentElement;
+  if (!parent) return;
 
-    siblings.forEach((sibling) => {
-      if (sibling !== container) {
-        sibling.classList.remove("what-content-active");
-        sibling.classList.toggle("what-sibling");
-      }
-    });
-  }
+  container.classList.toggle("what-content-active");
+  const isOpen = container.classList.contains("what-content-active");
+
+  parent.querySelectorAll(".what-content").forEach((el) => {
+    const card = el as HTMLDivElement;
+    if (card === container) {
+      card.classList.remove("what-sibling");
+      return;
+    }
+    card.classList.remove("what-content-active");
+    if (isOpen) {
+      card.classList.add("what-sibling");
+    } else {
+      card.classList.remove("what-sibling");
+    }
+  });
 }
