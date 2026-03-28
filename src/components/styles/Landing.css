@@ -228,31 +228,13 @@
   letter-spacing: 2px;
 }
 
-/* Second headline pair (GSAP swap): Developer in flow, Full Stack stacked */
-.landing-h2-info {
-  position: relative;
-  z-index: 2;
-  color: #eae5ec;
-}
-
 .landing-h2-info-1 {
   position: absolute;
   top: 0;
-  left: 0;
-  z-index: 1;
-  color: var(--accentColor);
-  text-shadow: 0 0 28px rgba(94, 234, 212, 0.4);
-}
-
-/* First headline pair: Full Stack in front, Developer behind (still readable) */
-.landing-h2-1 {
-  position: relative;
-  z-index: 2;
-  color: #eae5ec;
 }
 
 h2.landing-info-h2 {
-  color: #eae5ec;
+  color: #14b8a6;
   font-size: 42px;
   width: 120%;
   margin: 0;
@@ -265,25 +247,17 @@ h2.landing-info-h2 {
 .landing-h2-2 {
   position: absolute;
   top: 0;
-  left: 0;
-  z-index: 1;
-  color: var(--accentColor);
-  text-shadow: 0 0 28px rgba(94, 234, 212, 0.4);
 }
 
-/* Soft edge fade — was hiding too much of the back word */
 .landing-info-h2::after {
   content: "";
   position: absolute;
   width: 100%;
   height: 120%;
   z-index: 3;
-  pointer-events: none;
-  background-image: linear-gradient(
-    0deg,
-    var(--backgroundColor) 18%,
-    rgba(10, 14, 23, 0) 85%
-  );
+  background-image: linear-gradient(0deg,
+      var(--backgroundColor) 40%,
+      rgba(0, 0, 0, 0) 110%);
   top: 0;
   left: 0;
 }
