@@ -10,6 +10,7 @@ export let smoother: ScrollSmoother;
 
 const Navbar = () => {
   useEffect(() => {
+    smoother?.kill();
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
@@ -23,21 +24,29 @@ const Navbar = () => {
     smoother.scrollTop(0);
     smoother.paused(true);
 
-    let links = document.querySelectorAll(".header ul a");
-    links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
-        }
-      });
+    const ac = new AbortController();
+    const { signal } = ac;
+
+    const onNavClick = (e: Event) => {
+      if (window.innerWidth > 1024) {
+        e.preventDefault();
+        const el = e.currentTarget as HTMLAnchorElement;
+        const section = el.getAttribute("data-href");
+        smoother.scrollTo(section, true, "top top");
+      }
+    };
+
+    document.querySelectorAll(".header ul a").forEach((elem) => {
+      elem.addEventListener("click", onNavClick, { signal });
     });
-    window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
-    });
+
+    const onResize = () => ScrollSmoother.refresh(true);
+    window.addEventListener("resize", onResize, { passive: true, signal });
+
+    return () => {
+      ac.abort();
+      smoother?.kill();
+    };
   }, []);
   return (
     <>

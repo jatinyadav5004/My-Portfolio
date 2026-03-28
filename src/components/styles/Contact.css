@@ -14,9 +14,27 @@
   margin: 0;
 }
 
+.contact-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .contact-flex {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, max-content);
+  gap: 48px 64px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-aside {
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) minmax(200px, 280px);
+  gap: 32px 40px;
+  align-items: start;
+  min-width: 0;
 }
 
 .contact-flex h4 {
@@ -28,6 +46,7 @@
 .contact-box {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .contact-flex p {
@@ -37,10 +56,25 @@
 
 a.contact-social,
 p.contact-social {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   font-size: 25px;
   border-bottom: 1px solid #ccc;
   margin: 0;
   padding: 8px 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+a.contact-social span {
+  min-width: 0;
+}
+
+a.contact-social svg {
+  flex-shrink: 0;
 }
 
 .contact-box h2 {
@@ -94,12 +128,33 @@ p.contact-social {
   .contact-flex p {
     margin-top: 0px;
   }
+
+  .contact-aside {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 32px;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .contact-flex {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-aside {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    max-width: 100%;
+  }
 }
 
 @media only screen and (max-width: 900px) {
   .contact-flex {
-    flex-direction: column;
     gap: 40px;
+  }
+
+  .contact-aside {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .contact-flex p {

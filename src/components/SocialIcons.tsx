@@ -10,49 +10,77 @@ import HoverLinks from "./HoverLinks";
 
 const SocialIcons = () => {
   useEffect(() => {
-    const social = document.getElementById("social") as HTMLElement;
+    const social = document.getElementById("social") as HTMLElement | null;
+    if (!social) return;
+
+    type ItemState = {
+      elem: HTMLElement;
+      link: HTMLElement;
+      mouseX: number;
+      mouseY: number;
+      currentX: number;
+      currentY: number;
+    };
+
+    const items: ItemState[] = [];
 
     social.querySelectorAll("span").forEach((item) => {
       const elem = item as HTMLElement;
-      const link = elem.querySelector("a") as HTMLElement;
+      const link = elem.querySelector("a") as HTMLElement | null;
+      if (!link) return;
+      const w = elem.clientWidth || 50;
+      const h = elem.clientHeight || 50;
+      const cx = w / 2;
+      const cy = h / 2;
+      items.push({
+        elem,
+        link,
+        mouseX: cx,
+        mouseY: cy,
+        currentX: cx,
+        currentY: cy,
+      });
+    });
 
-      const rect = elem.getBoundingClientRect();
-      let mouseX = rect.width / 2;
-      let mouseY = rect.height / 2;
-      let currentX = 0;
-      let currentY = 0;
+    if (items.length === 0) return;
 
-      const updatePosition = () => {
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
-
-        link.style.setProperty("--siLeft", `${currentX}px`);
-        link.style.setProperty("--siTop", `${currentY}px`);
-
-        requestAnimationFrame(updatePosition);
-      };
-
-      const onMouseMove = (e: MouseEvent) => {
+    const onMouseMove = (e: MouseEvent) => {
+      items.forEach((state) => {
+        const rect = state.elem.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
         if (x < 40 && x > 10 && y < 40 && y > 5) {
-          mouseX = x;
-          mouseY = y;
+          state.mouseX = x;
+          state.mouseY = y;
         } else {
-          mouseX = rect.width / 2;
-          mouseY = rect.height / 2;
+          state.mouseX = rect.width / 2;
+          state.mouseY = rect.height / 2;
         }
-      };
+      });
+    };
 
-      document.addEventListener("mousemove", onMouseMove);
+    let rafId = 0;
+    let running = true;
 
-      updatePosition();
+    const tick = () => {
+      if (!running) return;
+      items.forEach((state) => {
+        state.currentX += (state.mouseX - state.currentX) * 0.1;
+        state.currentY += (state.mouseY - state.currentY) * 0.1;
+        state.link.style.setProperty("--siLeft", `${state.currentX}px`);
+        state.link.style.setProperty("--siTop", `${state.currentY}px`);
+      });
+      rafId = requestAnimationFrame(tick);
+    };
 
-      return () => {
-        elem.removeEventListener("mousemove", onMouseMove);
-      };
-    });
+    document.addEventListener("mousemove", onMouseMove, { passive: true });
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      running = false;
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("mousemove", onMouseMove);
+    };
   }, []);
 
   return (

@@ -1,7 +1,8 @@
-import { useState, useCallback } from "react";
+import { lazy, Suspense, useCallback, useState } from "react";
 import "./styles/Work.css";
-import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
+
+const WorkImage = lazy(() => import("./WorkImage"));
 
 const projects = [
   {
@@ -133,11 +134,20 @@ const Work = () => {
                       </div>
                     </div>
                     <div className="carousel-image-wrapper">
-                      <WorkImage
-                        image={project.image}
-                        alt={project.title}
-                        link={project.link}
-                      />
+                      <Suspense
+                        fallback={
+                          <div
+                            className="carousel-image-placeholder"
+                            aria-hidden
+                          />
+                        }
+                      >
+                        <WorkImage
+                          image={project.image}
+                          alt={project.title}
+                          link={project.link}
+                        />
+                      </Suspense>
                     </div>
                   </div>
                 </div>

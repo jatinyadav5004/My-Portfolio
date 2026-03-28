@@ -7,7 +7,7 @@ const Contact = () => {
       <div className="contact-container">
         <h3>Contact</h3>
         <div className="contact-flex">
-          <div className="contact-box">
+          <div className="contact-box contact-box--main">
             <h4>Connect</h4>
             <p>
               <a
@@ -41,43 +41,45 @@ const Contact = () => {
             </p>
             <p>B.Tech, Computer Science and Engineering (CGPA 9.89)</p>
           </div>
-          <div className="contact-box">
-            <h4>Social</h4>
-            <a
-              href="https://github.com/jatinyadav5004"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              GitHub <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/jatin-yadav-57629a203/"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              LinkedIn <MdArrowOutward />
-            </a>
-            <a
-              href="mailto:jatinyadav5004@gmail.com"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Email <MdArrowOutward />
-            </a>
-          </div>
-          <div className="contact-box">
-            <h2>
-              Designed and Developed <br /> by <span>Jatin Yadav</span>
-            </h2>
-            <h5>
-              <MdCopyright /> 2026
-            </h5>
+          <div className="contact-aside">
+            <div className="contact-box contact-box--social">
+              <h4>Social</h4>
+              <a
+                href="https://github.com/jatinyadav5004"
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                <span>GitHub</span> <MdArrowOutward />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/jatin-yadav-57629a203/"
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                <span>LinkedIn</span> <MdArrowOutward />
+              </a>
+              <a
+                href="mailto:jatinyadav5004@gmail.com"
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                <span>Email</span> <MdArrowOutward />
+              </a>
+            </div>
+            <div className="contact-box contact-box--credits">
+              <h2>
+                Designed and Developed <br /> by <span>Jatin Yadav</span>
+              </h2>
+              <h5>
+                <MdCopyright /> 2026
+              </h5>
+            </div>
           </div>
         </div>
       </div>
