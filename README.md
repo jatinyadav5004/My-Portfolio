@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# Jatin Yadav 3D Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the source code for Jatin Yadav's personal 3D portfolio built with React, TypeScript, Three.js, React Three Fiber, and GSAP. It includes animated page sections, a character scene, custom cursor interactions, and smooth transitions.
+
+Live site: deploy this project on Vercel and update this link with your domain.
+
+![Portfolio Preview](public/images/preview1.png)
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [GSAP License Note](#gsap-license-note)
+- [Customization Guide](#customization-guide)
+- [Troubleshooting](#troubleshooting)
+- [Deployment](#deployment)
+- [License](#license)
+
+## Features
+
+- Responsive one-page portfolio layout with reusable section components.
+- 3D character scene rendering powered by React Three Fiber and Three.js.
+- GSAP-powered animations and transitions for interactive storytelling.
+- Custom cursor, hover interactions, and scroll-driven visual effects.
+- Organized component architecture with dedicated utilities and style modules.
+
+## Tech Stack
+
+### Core
+
+- React 18
+- TypeScript
+- Vite
+
+### Animation and 3D
+
+- GSAP + `@gsap/react`
+- Three.js
+- `@react-three/fiber`
+- `@react-three/drei`
+- `@react-three/postprocessing`
+- `@react-three/cannon`
+- `@react-three/rapier`
+
+### Supporting Libraries
+
+- `react-icons`
+- `react-fast-marquee`
+- `@vercel/analytics`
+
+## Project Structure
+
+```text
+.
+├── public/                    # Static assets
+├── src/
+│   ├── assets/                # Local media/assets
+│   ├── components/
+│   │   ├── Character/         # 3D scene + character logic/utilities
+│   │   ├── styles/            # Section/component CSS files
+│   │   ├── About.tsx
+│   │   ├── Career.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Landing.tsx
+│   │   ├── MainContainer.tsx  # Main page composition
+│   │   ├── Navbar.tsx
+│   │   ├── TechStack.tsx
+│   │   ├── WhatIDo.tsx
+│   │   └── Work.tsx
+│   ├── context/               # Global providers (loading state, etc.)
+│   ├── data/                  # Static data/content definitions
+│   ├── App.tsx
+│   └── main.tsx
+├── package.json
+└── vite.config.ts
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ (recommended)
+- npm 9+ (or compatible)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <your-repository-url>
+   cd 3d-portfolio
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the local development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open the URL shown in the terminal (typically `http://localhost:5173`).
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm run dev`  
+  Starts Vite dev server and exposes host for local network testing.
 
-### `npm start`
+- `npm run build`  
+  Type-checks and builds a production-ready bundle.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- `npm run preview`  
+  Serves the production build locally for verification.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `npm run lint`  
+  Runs ESLint checks across the project.
 
-### `npm test`
+## GSAP License Note
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project uses the standard `gsap` package, including bonus plugins now available in the core package.
 
-### `npm run build`
+- Install dependencies with `npm install`.
+- If migrating from older setups, remove `gsap-trial` from your project.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Read official installation guidance here: [GSAP Installation Docs](https://gsap.com/docs/v3/Installation/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Customization Guide
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You can adapt this portfolio to your own profile by updating the following areas:
 
-### `npm run eject`
+- **Content sections**: Edit files in `src/components/` such as `About.tsx`, `Career.tsx`, `WhatIDo.tsx`, and `Work.tsx`.
+- **Data source**: Update static values in files under `src/data/`.
+- **Styling**: Modify component styles in `src/components/styles/` and global styles in `src/index.css` / `src/App.css`.
+- **3D scene behavior**: Adjust scene logic in `src/components/Character/` and related utilities.
+- **Animations**: Tweak GSAP utilities under `src/components/utils/`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Troubleshooting
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Blank screen in development**  
+  Check browser console for module import errors and verify all dependencies are installed.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **3D performance issues on low-end devices**  
+  Reduce scene complexity and post-processing effects in the character/scene utilities.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **GSAP plugin errors**  
+  Ensure you have the correct plugin package and license configuration for your target environment.
 
-## Learn More
+- **TypeScript build failures**  
+  Run `npm run build` and address reported type errors before deploying.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Create a production build:
 
-### Code Splitting
+   ```bash
+   npm run build
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Validate locally:
 
-### Analyzing the Bundle Size
+   ```bash
+   npm run preview
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Deploy the generated `dist/` folder to your hosting provider (for example Vercel, Netlify, or Cloudflare Pages).
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is open source and available under the [MIT License](LICENSE).
