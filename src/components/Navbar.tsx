@@ -61,7 +61,7 @@ const Navbar = () => {
           target="_blank"
           rel="noreferrer"
         >
-          linkedin.com/in/jatin-yadav-57629a203
+          Welcome to my portfolio
         </a>
         <ul>
           <li>
