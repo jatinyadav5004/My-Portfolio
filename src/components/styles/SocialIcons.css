@@ -11,7 +11,7 @@
 
 .social-icons {
   position: absolute;
-  left: 0px;
+  left: -65px;
   bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -90,6 +90,12 @@ div.resume-button span,
 
 .resume-button:hover span {
   color: #0b0f19;
+}
+
+@media only screen and (max-width: 1150px) {
+  .social-icons {
+    left: 10px;
+  }
 }
 
 @media only screen and (max-width: 899px) {
