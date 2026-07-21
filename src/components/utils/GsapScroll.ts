@@ -62,8 +62,8 @@ export function setCharTimeline(
   if (window.innerWidth > 1024) {
     if (character) {
       tl1
-        .fromTo(character.rotation, { y: 0 }, { y: 0.7, duration: 1 }, 0)
-        .fromTo(camera.position, { z: 27 }, { z: 26, duration: 1 }, 0)
+        .fromTo(character.rotation, { y: 0.35 }, { y: 0.7, duration: 1 }, 0)
+        .fromTo(camera.position, { z: 31 }, { z: 26, duration: 1 }, 0)
         .fromTo(".character-model", { xPercent: -50, x: 0 }, { xPercent: -50, x: "-12vw", duration: 1 }, 0)
         .to(".landing-container", { opacity: 0, duration: 0.4 }, 0)
         .to(".landing-container", { y: "40%", duration: 0.8 }, 0)
