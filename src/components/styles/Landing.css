@@ -341,7 +341,7 @@ h2.landing-info-h2 {
   .landing-intro {
     top: 50%;
     left: auto;
-    right: 66%;
+    right: 68%;
     transform: translate(0%, -50%);
   }
 
@@ -352,7 +352,7 @@ h2.landing-info-h2 {
     text-align: left;
     transform: translate(0%, -50%);
     right: auto;
-    left: 66%;
+    left: 68%;
   }
 }
 
