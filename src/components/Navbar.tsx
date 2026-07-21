@@ -22,21 +22,30 @@ const Navbar = () => {
     });
 
     smoother.scrollTop(0);
-    smoother.paused(true);
+    smoother.paused(false);
 
     const ac = new AbortController();
     const { signal } = ac;
 
     const onNavClick = (e: Event) => {
-      if (window.innerWidth > 1024) {
-        e.preventDefault();
-        const el = e.currentTarget as HTMLAnchorElement;
-        const section = el.getAttribute("data-href");
-        smoother.scrollTo(section, true, "top top");
+      const el = e.currentTarget as HTMLAnchorElement;
+      const section = el.getAttribute("data-href") || el.getAttribute("href");
+      if (section && section.startsWith("#")) {
+        const targetEl = document.querySelector(section);
+        if (targetEl) {
+          e.preventDefault();
+          ScrollTrigger.refresh();
+          smoother?.refresh();
+          if (smoother && window.innerWidth > 1024) {
+            smoother.scrollTo(targetEl, true, "top top");
+          } else {
+            targetEl.scrollIntoView({ behavior: "smooth" });
+          }
+        }
       }
     };
 
-    document.querySelectorAll(".header ul a").forEach((elem) => {
+    document.querySelectorAll(".header ul a, .navbar-title").forEach((elem) => {
       elem.addEventListener("click", onNavClick, { signal });
     });
 

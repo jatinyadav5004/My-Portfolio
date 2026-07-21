@@ -3,95 +3,86 @@
   max-width: var(--cMaxWidth);
   width: var(--cWidth);
   bottom: 0;
-  z-index: 99;
+  z-index: 999;
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
 }
+
 .social-icons {
   position: absolute;
-  left: -20px;
-  bottom: 20px;
-  display: none;
+  left: 0px;
+  bottom: 30px;
+  display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   z-index: 999;
-  padding: 10px;
+  padding: 5px;
   pointer-events: auto;
 }
-.social-icons:hover {
-  transition: 0.3s;
-  color: var(--backgroundColor);
-}
-.social-icons a:hover {
-  color: var(--backgroundColor);
-  /* transform: scale(1.2); */
-}
-.social-icons span {
-  width: 50px;
-  height: 50px;
-  position: relative;
+
+.social-icon-link {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c4c4c4;
+  font-size: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-.social-icons a {
-  --siLeft: 50%;
-  --siTop: 50%;
-  position: absolute;
-  left: var(--siLeft, 50%);
-  top: var(--siTop, 50%);
-  transform: translate(-50%, -50%);
-  display: flex;
-  font-size: 23px;
-  will-change: left, top;
-  transition: transform 0.3s ease-out;
+
+.social-icon-link:hover {
+  background: var(--accentColor, #22d3ee);
+  color: #0b0f19;
+  border-color: var(--accentColor, #22d3ee);
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(34, 211, 238, 0.4);
 }
+
 .resume-button {
   position: absolute;
-  z-index: 99;
+  z-index: 999;
   display: flex;
-  gap: 5px;
+  gap: 8px;
   bottom: 40px;
   right: 0;
   width: auto;
   text-wrap: nowrap;
-  letter-spacing: 4px;
-  font-size: 15px;
-  line-height: 15px;
+  letter-spacing: 3px;
+  font-size: 14px;
+  line-height: 14px;
   font-weight: 600;
-  color: #5e5e5e;
+  color: #a3a3a3;
   cursor: pointer;
-  transition: 0.5s;
-  transform-origin: left bottom;
-  transform: translateX(100%) rotateZ(-90deg);
+  transition: all 0.3s ease;
+  transform-origin: right bottom;
   pointer-events: auto;
 }
+
 .resume-button:hover {
-  color: #fff;
+  color: #22d3ee;
 }
+
 div.resume-button span {
-  color: #fff;
-  font-size: 17px;
-  margin-top: -1px;
+  color: #22d3ee;
+  font-size: 18px;
   display: flex;
   align-items: center;
 }
-@media only screen and (min-width: 900px) {
+
+@media only screen and (max-width: 899px) {
   .social-icons {
-    display: flex;
-    gap: 20px;
-  }
-  .social-icons a {
-    font-size: 28px;
+    flex-direction: row;
+    bottom: 20px;
+    left: 20px;
   }
 }
-@media only screen and (min-width: 768px) {
-  .resume-button {
-    transform: none;
-    font-size: 20px;
-    line-height: 20px;
-  }
-  div.resume-button span {
-    font-size: 23px;
-    margin-top: -1.5px;
-  }
-}
+
