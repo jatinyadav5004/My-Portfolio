@@ -12,6 +12,7 @@ const setAnimations = (gltf: GLTF) => {
     const introAction = mixer.clipAction(introClip!);
     introAction.setLoop(THREE.LoopOnce, 1);
     introAction.clampWhenFinished = true;
+    introAction.timeScale = 2.2;
     introAction.play();
     const clipNames = ["key1", "key2", "key5", "key6"];
     clipNames.forEach((name) => {
@@ -38,11 +39,12 @@ const setAnimations = (gltf: GLTF) => {
     );
     const introAction = mixer.clipAction(introClip!);
     introAction.clampWhenFinished = true;
+    introAction.timeScale = 2.2;
     introAction.reset().play();
     setTimeout(() => {
       const blink = gltf.animations.find((clip) => clip.name === "Blink");
       mixer.clipAction(blink!).play().fadeIn(0.5);
-    }, 2500);
+    }, 1200);
   }
   function hover(gltf: GLTF, hoverDiv: HTMLDivElement) {
     let eyeBrowUpAction = createBoneAction(
