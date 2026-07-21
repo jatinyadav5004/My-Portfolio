@@ -12,6 +12,8 @@
   width: var(--cWidth);
   max-width: var(--cMaxWidth);
   margin: 0 auto;
+  padding-left: 60px;
+  box-sizing: border-box;
 }
 
 .contact-header {
@@ -218,6 +220,10 @@
 }
 
 @media only screen and (max-width: 960px) {
+  .contact-container {
+    padding-left: 0;
+  }
+
   .contact-grid {
     grid-template-columns: 1fr;
   }
