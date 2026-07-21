@@ -51,31 +51,45 @@
   position: absolute;
   z-index: 999;
   display: flex;
-  gap: 8px;
-  bottom: 40px;
-  right: 0;
-  width: auto;
-  text-wrap: nowrap;
-  letter-spacing: 3px;
-  font-size: 14px;
-  line-height: 14px;
+  align-items: center;
+  gap: 10px;
+  bottom: 30px;
+  right: 0px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-size: 13px;
   font-weight: 600;
-  color: #a3a3a3;
+  color: #e2e8f0;
   cursor: pointer;
-  transition: all 0.3s ease;
-  transform-origin: right bottom;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .resume-button:hover {
-  color: #22d3ee;
+  background: var(--accentColor, #22d3ee);
+  color: #0b0f19;
+  border-color: var(--accentColor, #22d3ee);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.4);
 }
 
-div.resume-button span {
-  color: #22d3ee;
+div.resume-button span,
+.resume-button span {
+  color: var(--accentColor, #22d3ee);
   font-size: 18px;
   display: flex;
   align-items: center;
+  transition: color 0.3s ease;
+}
+
+.resume-button:hover span {
+  color: #0b0f19;
 }
 
 @media only screen and (max-width: 899px) {
