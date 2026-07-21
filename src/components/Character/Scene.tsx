@@ -32,7 +32,7 @@ const Scene = () => {
         antialias: true,
       });
       renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1;
       canvasDiv.current.appendChild(renderer.domElement);
@@ -67,7 +67,7 @@ const Scene = () => {
             setTimeout(() => {
               light.turnOnLights();
               animations.startIntro();
-            }, 2500);
+            }, 100);
           });
           window.addEventListener("resize", () =>
             handleResize(renderer, camera, canvasDiv, character)
@@ -106,8 +106,24 @@ const Scene = () => {
         landingDiv.addEventListener("touchstart", onTouchStart);
         landingDiv.addEventListener("touchend", onTouchEnd);
       }
+
+      let isVisible = true;
+      let observer: IntersectionObserver | null = null;
+      if (canvasDiv.current && "IntersectionObserver" in window) {
+        observer = new IntersectionObserver(
+          ([entry]) => {
+            isVisible = entry.isIntersecting;
+          },
+          { threshold: 0.05 }
+        );
+        observer.observe(canvasDiv.current);
+      }
+
+      let animFrameId: number;
       const animate = () => {
-        requestAnimationFrame(animate);
+        animFrameId = requestAnimationFrame(animate);
+        if (!isVisible || document.hidden) return;
+
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -126,7 +142,13 @@ const Scene = () => {
         renderer.render(scene, camera);
       };
       animate();
+
       return () => {
+        cancelAnimationFrame(animFrameId);
+        if (observer && canvasDiv.current) {
+          observer.unobserve(canvasDiv.current);
+          observer.disconnect();
+        }
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();

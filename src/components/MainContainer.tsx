@@ -3,6 +3,7 @@ import {
   PropsWithChildren,
   Suspense,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import Landing from "./Landing";
@@ -18,6 +19,32 @@ const Contact = lazy(() => import("./Contact"));
 const Cursor = lazy(() => import("./Cursor"));
 const SocialIcons = lazy(() => import("./SocialIcons"));
 const TechStack = lazy(() => import("./TechStack"));
+
+const LazyViewport = ({ children }: PropsWithChildren) => {
+  const [shouldRender, setShouldRender] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (shouldRender) return;
+    const elem = containerRef.current;
+    if (!elem) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(elem);
+    return () => observer.disconnect();
+  }, [shouldRender]);
+
+  return <div ref={containerRef}>{shouldRender ? children : null}</div>;
+};
 
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
@@ -73,11 +100,13 @@ const MainContainer = ({ children }: PropsWithChildren) => {
               </SectionWithRefresh>
             </Suspense>
             {isDesktopView && (
-              <Suspense fallback={null}>
-                <SectionWithRefresh>
-                  <TechStack />
-                </SectionWithRefresh>
-              </Suspense>
+              <LazyViewport>
+                <Suspense fallback={null}>
+                  <SectionWithRefresh>
+                    <TechStack />
+                  </SectionWithRefresh>
+                </Suspense>
+              </LazyViewport>
             )}
             <Suspense fallback={null}>
               <SectionWithRefresh>

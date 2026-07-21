@@ -129,26 +129,34 @@ const TechStack = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const workElem = document.getElementById("work");
+      if (!workElem) return;
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
+      const threshold = workElem.getBoundingClientRect().top + window.scrollY;
+      setIsActive(scrollY > threshold - 400);
     };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
-    window.addEventListener("scroll", handleScroll);
+
+    const headerLinks = document.querySelectorAll(".header a");
+    const activeIntervals: number[] = [];
+
+    const onHeaderClick = () => {
+      const interval = window.setInterval(() => {
+        handleScroll();
+      }, 50);
+      activeIntervals.push(interval);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 1000);
+    };
+
+    headerLinks.forEach((elem) => elem.addEventListener("click", onHeaderClick));
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      headerLinks.forEach((elem) => elem.removeEventListener("click", onHeaderClick));
+      activeIntervals.forEach((id) => clearInterval(id));
     };
   }, []);
   const materials = useMemo(() => {
